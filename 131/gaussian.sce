@@ -1,17 +1,20 @@
-n = size(A, 'r')
-for col = 1:n
-	if A(col, col) == 0 then
-		v = A(col+1:$, col)
-		[m, i] = max(v)
-		temp = A(i, :)
-		A(i, :) = A(col, :)
-		A(col, :) = temp
+function X = gaussian(A)
+	X = A
+	n = size(X, 'r')
+	for col = 1:n
+		if X(col, col) == 0 then
+			v = X(col+1:$, col)
+			[m, i] = max(v)
+			temp = X(i, :)
+			X(i, :) = X(col, :)
+			X(col, :) = temp
+		end
+		X(col, col:$) = X(col, col:$) / X(col, col)
+		for row = col+1:n
+			X(row, col:$) = X(row, col:$) - (X(row, col) * X(col, col:$))
+		end
 	end
-	A(col, col:$) = A(col, col:$) / A(col, col)
-	for row = col+1:n
-		A(row, col:$) = A(row, col:$) - (A(row, col) * A(col, col:$))
-	end
-end
+endfunction	
 
 x = zeros(n, 1)
 x(n) = A(n, n+1)
