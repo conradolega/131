@@ -1,3 +1,4 @@
+n = size(A, 'r')
 for col = 1:n
 	if A(col, col) == 0 then
 		v = A(col+1:$, col)
@@ -8,7 +9,7 @@ for col = 1:n
 	end
 	A(col, col:$) = A(col, col:$) / A(col, col)
 	for row = col+1:n
-		A(row, col:$) = A(row, col:$) - A(row, col) * A(col, :)
+		A(row, col:$) = A(row, col:$) - (A(row, col) * A(col, col:$))
 	end
 end
 
