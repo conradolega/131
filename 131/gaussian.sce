@@ -5,7 +5,9 @@ for col = 1:n
 		v = A(col+1:$, col)
 		[m, i] = max(v)
 		% E1 (row swapping)
-		swap A(col, :) <-> A(i, :)
+		temp = A(i, :)
+		A(i, :) = A(col, :)
+		A(col, :) = temp
 	end
 	% E2 (row scalar multiplication)
 	A(col, col:$) = A(col, col:$) / A(col, col)
