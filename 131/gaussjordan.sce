@@ -1,4 +1,4 @@
-function A = gaussjordan(Y)
+function [A, x] = gaussjordan(Y)
 	n = size(Y, 'r')
 	A = gaussian(Y)
 	x = zeros(n, 1)
@@ -15,4 +15,8 @@ function A = gaussjordan(Y)
 	end
 
 	x = A(:,$)
+endfunction
+
+function x = solveLinear(A, b)
+	[A, x] = gaussjordan([A b])
 endfunction
