@@ -8,5 +8,14 @@ function x = probset1(A)
 	else
 		error("The matrix is not square.")
 	end
+endfunction
 
+function conds = probset2(n)
+	conds = zeros(n, 1)
+	for i = 1:n
+		h = hilbert(i)
+		conds(i) = cond(h)
+		x = ones(i, 1)
+		b = h * x
+	end
 endfunction
