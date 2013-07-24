@@ -7,6 +7,6 @@ function y = polynomial(x, a)
 		for j=1:m-1
 			y(i) = y(i) + a(j + 1)*(x(i)^j)
 		end
-		y(i) = y(i) + (2 * rand() - 1)
+		y(i) = y(i) + (2 * rand() - 1) * 10^-6
 	end
 endfunction
