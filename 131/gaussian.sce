@@ -11,9 +11,11 @@ function X = gaussian(A)
 				X(col, :) = temp
 			end
 		end
-		X(col, col:$) = X(col, col:$) / X(col, col)
-		for row = col+1:n
-			X(row, col:$) = X(row, col:$) - (X(row, col) * X(col, col:$))
+		if X(col, col) <> 0 then
+			X(col, col:$) = X(col, col:$) / X(col, col)
+			for row = col+1:n
+				X(row, col:$) = X(row, col:$) - (X(row, col) * X(col, col:$))
+			end
 		end
 	end
 endfunction
