@@ -4,7 +4,7 @@ function X = gaussian(A)
 	for col = 1:n
 		if col <> n then
 			Xtemp = X(col:$, col:$)
-			[v, pos] = max(abs(Xtemp), 'r')
+			[v, pos] = max(abs(Xtemp))
 			temp = Xtemp(pos(1), :)
 			Xtemp(pos(1), :) = Xtemp(col, :)
 			Xtemp(col, :) = temp
