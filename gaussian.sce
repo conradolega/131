@@ -3,15 +3,9 @@ function X = gaussian(A)
 	n = size(X, 'r')
 	for col = 1:n
 		if col <> n then
-			Xtemp = X(col:$, col:$)
-			[v, pos] = max(abs(Xtemp))
-			temp = Xtemp(pos(1), :)
-			Xtemp(pos(1), :) = Xtemp(col, :)
-			Xtemp(col, :) = temp
-			temp = Xtemp(:, pos(2))
-			Xtemp(:, pos(2)) = Xtemp(:, col)
-			Xtemp(:, col) = temp
-			X(col:$, col:$) = Xtemp
+			[v, pos] = max(abs(X(col:$, col:$))
+			X([col, pos(1)+col-1], :) = X([pos(1)+col-1, col], :)
+			X(:, [col, pos(2)+col-1]) = X(:, [pos(2)+col-1, col])
 		end
 		if X(col, col) <> 0 then
 			X(col, col:$) = X(col, col:$) / X(col, col)
