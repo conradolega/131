@@ -2,14 +2,17 @@ function X = gaussian(A)
 	X = A
 	n = size(X, 'r')
 	for col = 1:n
-		[v, pos] = max(abs(X), 'r')
-		// Switching rows
-		temp = X(pos(1), :)
-		X(pos(1), :) = X(col, :)
-		X(col, :) = temp
-		temp = X(:, pos(2))
-		X(:, pos(1)) = X(row, :)
-		X(row, :) = temp
+		if col <> n then
+			Xtemp = X(col:$, col:$)
+			[v, pos] = max(abs(Xtemp), 'r')
+			temp = Xtemp(pos(1), :)
+			Xtemp(pos(1), :) = Xtemp(col, :)
+			Xtemp(col, :) = temp
+			temp = Xtemp(:, pos(2))
+			Xtemp(:, pos(2)) = Xtemp(:, col)
+			Xtemp(:, col) = temp
+			X(col:$, col:$) = Xtemp
+		end
 		if X(col, col) <> 0 then
 			X(col, col:$) = X(col, col:$) / X(col, col)
 			for row = col+1:n
