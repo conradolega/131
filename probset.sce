@@ -1,22 +1,25 @@
-function x = probset1(A)
+function [A, x] = probset1(A)
 	m = size(A, 'r')
 	n = size(A, 'c')
 	
 	if m == n then
 		b = zeros(n, 1)
-		x = solvelinear(A, b)
+		[A, x] = solvelinear(A, b)
 	else
 		error("The matrix is not square.")
 	end
 endfunction
 
-function conds = probset2(n)
+function xp = probset2(n)
 	conds = zeros(n, 1)
-	for i = 1:n
+	for i = 2:n
 		h = hilbert(i)
 		conds(i) = cond(h)
 		x = ones(i, 1)
 		b = h * x
+		xp = solvelinear(h, b)
+		disp(xp)
+		disp(rref([h b]))
 	end
 endfunction
 
