@@ -17,6 +17,6 @@ function [A, x] = gaussjordan(Y)
 	x = A(:,$)
 endfunction
 
-function x = solvelinear(A, b)
+function [A, x] = solvelinear(A, b)
 	[A, x] = gaussjordan([A b])
 endfunction
