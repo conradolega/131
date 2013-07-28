@@ -3,7 +3,7 @@ function X = gaussian(A)
 	n = size(X, 'r')
 	for col = 1:n
 		if col <> n then
-			[v, pos] = max(abs(X(col:$, col:$)))
+			[v, pos] = max(abs(X(col:$, col:n)))
 			X([col, pos(1)+col-1], :) = X([pos(1)+col-1, col], :)
 			X(:, [col, pos(2)+col-1]) = X(:, [pos(2)+col-1, col])
 		end
