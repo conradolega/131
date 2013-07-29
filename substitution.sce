@@ -10,16 +10,8 @@ endfunction
 function x = backsub(U, b)
 	n = size(U, 'r')
 	x = zeros(n, 1)
-	z = 1
-	if U(n, n) == 0 then
-		U(n, n) = poly(0, 's' + string(z))
-		z = z + 1
-		x(n) = U(n, n)
-	else
-		x(n) = b(n) / U(n, n)
-	end
+	x(n) = b(n) / U(n, n)
 	for i = n-1:-1:1
-		disp(U)
-		x(i) = pdiv((b(i) - (U(i, i+1:$) * x(i+1:$))), U(i, i))
+		x(i) = (b(i) - (U(i, i+1:$) * x(i+1:$)))/U(i, i)
 	end
 endfunction
