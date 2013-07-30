@@ -1,6 +1,6 @@
 function [A, x] = gaussjordan(Y)
 	n = size(Y, 'r')
-	A = gaussian(Y)
+	A = gaussianpartial(Y)
 	x = zeros(n, 1)
 	x(n) = A(n, n+1)
 
