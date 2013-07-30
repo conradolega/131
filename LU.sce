@@ -12,7 +12,7 @@ function [L, U] = lu_factor(A)
 	U = A
 endfunction
 
-function [y, x] = lu_solve(A, b)
+function x = lu_solve(A, b)
 	[L, U] = lu_factor(A)
 	n = size(A, 'r')
 	y = forwardsub(L, b)
