@@ -10,16 +10,18 @@ function [A, x] = probset1(A)
 	end
 endfunction
 
-function xp = probset2(n)
+function [conds, errs] = probset2(n)
 	conds = zeros(n, 1)
+	errs = []
 	for i = 2:n
 		h = hilbert(i)
 		conds(i) = cond(h)
 		x = ones(i, 1)
 		b = h * x
-		xp = solvelinear(h, b)
-		disp(xp)
-		disp(rref([h b]))
+		[val, xp] = solvelinear(h, b)
+		errs(i - 1, 1) = norm(x - xp) / norm(x)
+		disp(norm(x - xp) / norm(x))
+		// disp(rref([h b]))
 	end
 endfunction
 
@@ -30,13 +32,27 @@ function [x, a1, a2, a3] = probset3(n, m)
 	end
 
 	a1 = ones(m, 1)
-
+	a1t = normal_lu(x, a1)
+	disp(a1t)
 	a2 = ones(m, 1)
 	for j = 0:m-1
 	  a2(j + 1) = (-1)^j
 	end
-
+	a2t = normal_lu(x, a2)
+	disp(a2t)
 	a3 = zeros(m, 1)
 	a3(1) = 1
 	a3(m) = 1
+	a3t = normal_lu(x, a3)
+	disp(a3t)
+endfunction
+
+function at = normal_lu(x, a)
+	y = polynomial(x, a)
+	v = monomial(x, y)
+	vp = v' * v
+	yp = v' * y
+	disp(vp)
+	disp(yp)
+	at = lu_solve(vp, yp)
 endfunction
