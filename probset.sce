@@ -49,10 +49,8 @@ endfunction
 
 function at = normal_lu(x, a)
 	y = polynomial(x, a)
-	v = monomial(x, y)
+	v = monomial(x, size(a, 'r'))
 	vp = v' * v
 	yp = v' * y
-	disp(vp)
-	disp(yp)
 	at = lu_solve(vp, yp)
 endfunction
