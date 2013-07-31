@@ -31,3 +31,13 @@ for i=2:n-1
     s(i, i+1) = -1
     y(i) = 6 * (population(i) - population(i + 1) - population(i - 1) + population(i))
 end
+
+// Using Newton's divided differences
+x = (1900:10:1980)'
+newton = zeros(n, n)
+newton(:, 1) = population
+for i=2:n
+    for j=i:n
+        newton(j, i) = (newton(j, i-1) - newton(i-1, i-1)) / (x(j) - x(i-1))
+    end
+end
