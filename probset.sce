@@ -33,18 +33,27 @@ function [x, a1, a2, a3] = probset3(n, m)
 
 	a1 = ones(m, 1)
 	a1t = normal_lu(x, a1)
+	a1q = normal_qr(x, a1)
+	disp(a1)
 	disp(a1t)
+	disp(a1q)
 	a2 = ones(m, 1)
 	for j = 0:m-1
 	  a2(j + 1) = (-1)^j
 	end
 	a2t = normal_lu(x, a2)
+	a2q = normal_qr(x, a2)
+	disp(a2)
 	disp(a2t)
+	disp(a2q)
 	a3 = zeros(m, 1)
 	a3(1) = 1
 	a3(m) = 1
 	a3t = normal_lu(x, a3)
+	a3q = normal_qr(x, a3)
+	disp(a3)
 	disp(a3t)
+	disp(a3q)
 endfunction
 
 function at = normal_lu(x, a)
@@ -53,4 +62,11 @@ function at = normal_lu(x, a)
 	vp = v' * v
 	yp = v' * y
 	at = lu_solve(vp, yp)
+endfunction
+
+function aq = normal_qr(x, a)
+	y = polynomial(x, a)
+	v = monomial(x, size(a, 'r'))
+	[q, r] = gramschmidt(v)
+	aq = backsub(r, q' * y)
 endfunction
