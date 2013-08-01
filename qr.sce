@@ -1,4 +1,4 @@
-function [q, r] = qr(a)
+function [q, r] = gramschmidt(a)
 	[m, n] = size(a)
 	q = zeros(m, n)
 	r = zeros(n, n)
