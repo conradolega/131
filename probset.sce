@@ -18,10 +18,10 @@ function [conds, errs] = probset2(n)
 		conds(i) = cond(h)
 		x = ones(i, 1)
 		b = h * x
-		[val, xp] = solvelinear(h, b)
-		errs(i - 1, 1) = norm(x - xp) / norm(x)
-		disp(norm(x - xp) / norm(x))
-		// disp(rref([h b]))
+		//[val, xp] = solvelinear(h, b)
+		//errs(i - 1, 1) = norm(x - xp) / norm(x)
+		xgs = gaussseidel(h, b)
+		errs(i) = norm(x - xgs) / norm(x)
 	end
 endfunction
 
