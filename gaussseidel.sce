@@ -20,8 +20,8 @@ function [x_new, i] = gaussseidel(A, b)
 	R = Q - w * A
 	b = w * b
 	disp(w)
-	//while norm(x_new - x_old) > 10^-6
-	//	x_old = x_new
-	//	x_new = forwardsub(Q, R * x_old - b)
-	//end
+	while norm(x_new - x_old) > 10^-6
+		x_old = x_new
+		x_new = forwardsub(Q, R * x_old + b)
+	end
 endfunction
