@@ -10,7 +10,7 @@ function [A, x] = probset1(A)
 	end
 endfunction
 
-function [conds, errs] = probset2(n)
+function [conds, errs, iter] = probset2(n)
 	conds = zeros(n, 1)
 	errs = []
 	for i = 2:n
@@ -18,10 +18,10 @@ function [conds, errs] = probset2(n)
 		conds(i) = cond(h)
 		x = ones(i, 1)
 		b = h * x
-		//[val, xp] = solvelinear(h, b)
-		//errs(i - 1, 1) = norm(x - xp) / norm(x)
-		xgs = gaussseidel(h, b)
-		errs(i) = norm(x - xgs) / norm(x)
+		[val, xp] = solvelinear(h, b)
+		errs(i - 1, 1) = norm(x - xp) / norm(x)
+		[xgs, iter(i - 1)] = gaussseidel(h, b)
+		errs(i - 1, 2) = norm(x - xgs) / norm(x)
 	end
 endfunction
 
