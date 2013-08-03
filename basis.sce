@@ -1,18 +1,19 @@
-function basis = basis(U, b)
-    n = size(U, 'r')
-    z = 1
+function basis = basis(A)
+    n = size(A, 'r')
     basis = []
-    freevars = zeros(n, 1)
-    for i=1:n
-        if U(i, i) == 0 then
-            disp(z)
-            if size(basis, 'c') <> z then
-                basis(:, z) = zeros(n, 1)
+    for i=n:-1:1
+        if A(i, i) == 0 then
+            for j=i-1:-1:1
+                if A(j, i) <> 0 & isequal(A(j, 1:i-1), zeros(1, n-j+1)) then
+                    A([j, i], :) = A([i, j], :)
+                end
             end
-            basis(i, z) = z
-            freevars(i, 1) = z
-            if isequal(U(i, :), zeros(1, n)) == %f then
-                z = z + 1
-            end 
         end
+    end
+    for i=1:n
+        if A(i, i) == 0 then
+            basis = [basis -1 * A(:, i)]
+            basis(i, size(basis, 'c')) = 1
+        end
+    end
 endfunction
