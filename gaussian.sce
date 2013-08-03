@@ -13,6 +13,7 @@ function X = gaussianfull(A)
 				X(row, col:$) = X(row, col:$) - (X(row, col) * X(col, col:$))
 			end
 		end
+		X = clean(X)
 	end
 endfunction
 
@@ -30,5 +31,6 @@ function X = gaussianpartial(A)
 				X(row, col:$) = X(row, col:$) - (X(row, col) * X(col, col:$))
 			end
 		end
+		X = clean(X)
 	end
 endfunction
