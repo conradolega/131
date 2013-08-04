@@ -1,10 +1,11 @@
-function [A, x] = probset1(A)
+function b = probset1(A)
 	m = size(A, 'r')
 	n = size(A, 'c')
 	
 	if m == n then
 		b = zeros(n, 1)
 		[A, x] = solvelinear(A, b)
+		b = basis(A)
 	else
 		error("The matrix is not square.")
 	end
@@ -52,9 +53,7 @@ function an = normal_run(x, a)
 	for i=1:3
 		y = polynomial(x, a)
 		an(:, 1 + i) = normal_lu(v, y)
-		disp(an)
 		an(:, 4 + i) = normal_qr(v, y)
-		disp(an)
 	end
 endfunction
 
