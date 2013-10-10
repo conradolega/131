@@ -4,7 +4,14 @@ function y = f(x)
         end
 endfunction
 
-function y = gl(f, p)
+function y = m(flag, x, i)
+        if flag == 0 then y = 1
+        elseif flag == 1 then y = cos(i * %pi * x)
+        elseif flag == 2 then y = sin(i * %pi * x)
+        end
+endfunction
+
+function y = gl(f, p, flag)
         // source of abscissae and weights:
         // http://pomax.github.io/bezierinfo/legendre-gauss.html
         abscissae = [
@@ -29,6 +36,6 @@ function y = gl(f, p)
         ]
         y = 0
         for i=1:8
-                y = y + weights(i) * p * f(p * abcissae(i))
+                y = y + weights(i) * p * f(p * abcissae(i)) * m(flag, abscissae(i), i)
         end
 endfunction
