@@ -1,3 +1,17 @@
+function y = fourier(f, p, n)
+        // evaluate from -%pi:0.1:%pi
+        x = -%pi:0.1:%pi
+        for j = 1:size(x, 'c')
+                y(j) = gl(f, p, 0) / (2 * p)
+                for i = 1:n
+                        y(j) = y(j) + gl(f, p, i - 1) * cos((n * %pi * x(j)) / p) + gl(
+                end
+        end
+        for i = 1:n
+                y = y + gl(f, p, i - 1) * cos(
+        end
+endfunction
+
 function y = f(x)
         if (x >= -%pi & x <= 0) then y = 1
         elseif (x >= 0 & x <= %pi) then y = %e^(-x)
