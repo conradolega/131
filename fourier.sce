@@ -140,13 +140,12 @@ function y = f(x)
 	end
 endfunction
 
-function y = fourier(f, p, n)
-	x = -p:0.01:p
-	for j = 1:size(x, 'c')
-		y(j) = ai(f, p, 0) / 2;
-		for i = 1:n
-			y(j) = y(j) + ai(f, p, i) * cos((n * %pi * x(j)) / p) + bi(f, p, i) * sin((n * %pi * x(j)) / p);
-		end
+function y = fourier(f, x, p, n)
+	y = ai(f, p, 0) / 2;
+	for i = 1:n
+		y = y + ai(f, p, i) * cos((i * %pi * x) / p);
+		y = y + bi(f, p, i) * sin((i * %pi * x) / p);
+		disp(n * x);
 	end
 endfunction
 
@@ -161,5 +160,13 @@ function y = bi(f, p, i)
 	y = 0
 	for j = 1:8
 		y = y + weights(j) * f(p * abscissae(j)) * sin(i * %pi * abscissae(j));
+	end
+endfunction
+
+function y = number2(n)
+	x = -%pi:0.1:%pi
+	y = []
+	for i = 1:size(x, 'c')
+		y(i) = fourier(f, x(i), %pi, n)
 	end
 endfunction
