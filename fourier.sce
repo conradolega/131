@@ -170,3 +170,10 @@ function y = number2(n)
 		y(i) = fourier(f, x(i), %pi, n)
 	end
 endfunction
+
+y1 = number2(1)
+y10 = number2(10)
+y30 = number2(30)
+y40 = number2(40)
+plot2d(t, [u y1 y10 y30 y40])
+legends(['f(x)';'n=1';'n=10';'n=30';'n=40'], [1, 2, 3, 4, 5], opt="ur")
